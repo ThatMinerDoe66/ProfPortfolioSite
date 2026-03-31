@@ -49,6 +49,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+// For a gif preview of a project card
+  document.querySelectorAll('.project-item').forEach((item) => {
+  const img = item.querySelector('.project-image');
+  const staticSrc = img.src;
+  const gifSrc = img.dataset.gif;
+  let hoverTimer = null;
+
+  item.addEventListener('mouseenter', () => {
+    hoverTimer = setTimeout(() => {
+      if (gifSrc) img.src = gifSrc;
+    }, 750); // hover delay
+  });
+
+  item.addEventListener('mouseleave', () => {
+    clearTimeout(hoverTimer); // cancels if you leave before 1s
+    img.src = staticSrc;
+  });
+});
 
   /* ── Project cards: subtle parallax on mouse move ── */
   document.querySelectorAll('.project-item').forEach((item) => {
